@@ -22,7 +22,7 @@ public interface WeedVolumeClient {
 
     @RequestLine("POST /{fid}?cm={cm}")
     @Headers("Content-Type: multipart/form-data")
-    WeedFile upload(@Param("fid") String fid, @Param("cm") boolean cm, @Param("file") String bytes);
+    WeedFile upload(@Param("fid") String fid, @Param("cm") boolean cm, @Param("file") String chunkManifest);
 
     @RequestLine("DELETE /{fid}")
     WeedFile delete(@Param("fid") String fid);

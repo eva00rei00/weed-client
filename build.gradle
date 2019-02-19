@@ -22,7 +22,7 @@
 
 
 group = 'org.lokra.seaweedfs'
-version = '0.7.3.RELEASE'
+version = '1.0.3.RELEASE'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -59,5 +59,65 @@ jacocoTestReport {
         html.enabled = true
     }
 }
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            pom.project {
+                name project.name
+                packaging 'jar'
+                description 'SeaweedFS Client For Java.'
+                url 'https://github.com/yanfch/seaweedfs-client'
+
+                scm {
+                    url 'scm:git@github.com:yanfch/seaweedfs-client.git'
+                    connection 'scm:git@github.com:yanfch/seaweedfs-client.git'
+                    developerConnection 'git@github.com:yanfch/seaweedfs-client.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'https://mit-license.org'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'yanfch'
+                        name 'FuCheng Yan'
+                    }
+                }
+            }
+
+            repository(url: 'http://nexus.mochasoft.com.cn/nexus3/repository/releases/') {
+                authentication(userName: "admin", password: "admin123")
+            }
+
+        }
+    }
+}
+
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from 'build/docs/javadoc'
+//}
+//
+//task sourcesJar(type: Jar) {
+//    classifier = 'sources'
+//    from sourceSets.main.allSource
+//}
+//
+//artifacts {
+//    archives jar
+//    archives javadocJar
+//    archives sourcesJar
+//}
+//
+//signing {
+//    sign configurations.archives
+//}
 
 check.dependsOn jacocoTestReport
